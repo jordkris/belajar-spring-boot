@@ -6,7 +6,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DemoController {
     @RequestMapping("/")
-    private String index() {
+    private String hello() {
         return "Hello Spring";
+    }
+    @RequestMapping("/logout")
+    private String bye() {
+        return "Goodbye Spring";
     }
 }
