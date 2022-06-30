@@ -1,16 +1,16 @@
 package com.belajarspring.demo.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
-@RestController
+@Controller
 public class WebController {
-    @RequestMapping("/")
-    private String hello() {
-        return "Hello Spring";
+    @GetMapping("/")
+    public String index(Model model) {
+        model.addAttribute("title","Bank Microservices");
+        return "index";
     }
-    @RequestMapping("/logout")
-    private String bye() {
-        return "Goodbye Spring";
-    }
+
+
 }
