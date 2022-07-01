@@ -9,11 +9,11 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "account_number", unique = true)
+    @Column(name = "account_number", unique = true, nullable = false)
     private String accountNumber;
-    @Column(name = "account_name")
+    @Column(name = "account_name", nullable = false)
     private String accountName;
-    @Column(name = "account_balance")
+    @Column(name = "account_balance", nullable = false)
     private int accountBalance;
 
     public Account() {

@@ -10,16 +10,16 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "account_number")
+    @Column(name = "account_number", nullable = false)
     private String accountNumber;
 
-    @Column(name = "transaction_name")
+    @Column(name = "transaction_name", nullable = false)
     private String transactionName;
 
-    @Column(name ="transaction_amount")
+    @Column(name ="transaction_amount", nullable = false)
     private String transactionAmount;
 
-    @Column(name ="transaction_time")
+    @Column(name ="transaction_time", nullable = false)
     private Date transactionTime;
 
     public Transaction() {

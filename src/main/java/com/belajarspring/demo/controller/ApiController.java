@@ -1,6 +1,7 @@
 package com.belajarspring.demo.controller;
 
 import com.belajarspring.demo.entity.Account;
+import com.belajarspring.demo.request.EditRequest;
 import com.belajarspring.demo.request.TransferRequest;
 import com.belajarspring.demo.service.WebService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class ApiController {
     @Autowired
     WebService webService;
 
-    @PostMapping("/getAccounts")
+    @GetMapping("/getAccounts")
     public @ResponseBody ResponseEntity<Object> getAccounts() {
         try {
             return new ResponseEntity<>(webService.getAccounts(), HttpStatus.OK);
@@ -31,10 +32,10 @@ public class ApiController {
         }
     }
 
-    @PostMapping("/addAccount")
+    @PutMapping("/addAccount")
     public @ResponseBody ResponseEntity<Object> addAccount(@RequestBody @Validated Account account) {
         try {
-            webService.saveAccount(account);
+            webService.addAccount(account);
             Map<String, Object> output = new HashMap<>();
             output.put("message", "success");
             return new ResponseEntity<>(output, HttpStatus.OK);
@@ -45,10 +46,24 @@ public class ApiController {
         }
     }
 
-    @DeleteMapping("/deleteAccount/{id}")
-    public @ResponseBody ResponseEntity<Object> deleteAccount(@PathVariable Long id) {
+    @PatchMapping("/editAccount")
+    public @ResponseBody ResponseEntity<Object> editAccount(@RequestBody @Validated EditRequest editRequest) {
         try {
-            webService.deleteAccount(id);
+            webService.editAccount(editRequest);
+            Map<String, Object> output = new HashMap<>();
+            output.put("message", "success");
+            return new ResponseEntity<>(output, HttpStatus.OK);
+        } catch (Exception e) {
+            Map<String, Object> output = new HashMap<>();
+            output.put("message", e.getMessage());
+            return new ResponseEntity<>(output, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/deleteAccount/{an}")
+    public @ResponseBody ResponseEntity<Object> deleteAccount(@PathVariable String an) {
+        try {
+            webService.deleteAccount(an);
             Map<String, Object> output = new HashMap<>();
             output.put("message", "success");
             return new ResponseEntity<>(output, HttpStatus.OK);
@@ -73,7 +88,7 @@ public class ApiController {
         }
     }
 
-    @PostMapping("/getTransaction/{an}")
+    @GetMapping("/getTransaction/{an}")
     public @ResponseBody ResponseEntity<Object> transferBalance(@PathVariable String an) {
         try {
             return new ResponseEntity<>(webService.getTransaction(an), HttpStatus.OK);

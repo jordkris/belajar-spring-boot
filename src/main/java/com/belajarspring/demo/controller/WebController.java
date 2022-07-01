@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class WebController {
     @GetMapping("/")
-    public String index(Model model) {
-        model.addAttribute("title","Bank Microservices");
+    public String index() {
         return "index";
     }
 
