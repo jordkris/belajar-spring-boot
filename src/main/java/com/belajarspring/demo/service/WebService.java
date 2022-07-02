@@ -46,6 +46,7 @@ public class WebService {
     public void transferBalance(TransferRequest transferRequest) throws Exception {
         Account accountSender = accountRepository.findByAccountNumber(transferRequest.getAccountNumberSender());
         Account accountReceiver = accountRepository.findByAccountNumber(transferRequest.getAccountNumberReceiver());
+        if (transferRequest.getAmount() <= 0) throw new Exception("Transfer amount invalid");
         if (accountSender.getAccountBalance() < transferRequest.getAmount()) throw new Exception("Insufficient sender balance");
         accountSender.setAccountBalance(accountSender.getAccountBalance() - transferRequest.getAmount());
         accountReceiver.setAccountBalance(accountReceiver.getAccountBalance() + transferRequest.getAmount());
