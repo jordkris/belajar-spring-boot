@@ -89,7 +89,7 @@ public class ApiController {
     }
 
     @GetMapping("/getTransaction/{an}")
-    public @ResponseBody ResponseEntity<Object> transferBalance(@PathVariable String an) {
+    public @ResponseBody ResponseEntity<Object> getTransaction(@PathVariable String an) {
         try {
             return new ResponseEntity<>(webService.getTransaction(an), HttpStatus.OK);
         } catch (Exception e) {
